@@ -1,113 +1,27 @@
-# Angular gtag.js
+# AngularGtag
 
-A simple Google Analytics [gtag.js](https://developers.google.com/analytics/devguides/collection/gtagjs/) package for Angular.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.1.
 
-## Install
+## Development server
 
-```
-npm install angular-gtag --save
-```
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-Add the the tracking code from GA admin dashboard to `index.html` and set _send_page_view_ to false.
+## Code scaffolding
 
-```html
-<head>
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-YOUR_TRACKING_ID"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-YOUR_TRACKING_ID', { 'send_page_view': false });
-</script>
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-</head>
-```
+## Build
 
-Add the package to to your `app.module.ts`.
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-```ts
-import { GtagModule } from 'angular-gtag';
+## Running unit tests
 
-@NgModule({
-  imports: [
-    GtagModule.forRoot({ trackingId: 'UA-YOUR_TRACKING_ID', trackPageviews: true })
-  ]
-})
-```
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-**Options**
+## Running end-to-end tests
 
-- `trackingId: string (required)` Google Analytics UA tracking ID.
-- `trackPageviews: boolean` Default true.
-- `debug: boolean` Default false, console logs every gtag event/pageview.
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-## Pageviews
+## Further help
 
-The package will listen to route changes by default, you just need to instantiate service in the root of the project.
-
-```ts
-export class AppComponent {
-  constructor(gtag: Gtag) {}
-}
-```
-
-Gtag is a serivce that also allows you to track pageviews manually.
-
-```ts
-gtag.pageview();
-
-// or with custom params
-
-gtag.pageview({
-  page_title: 'Lesson Feed',
-  page_path: '/lessons',
-  page_location: 'https://angularfirebase.com/lessons'
-});
-```
-
-## Events
-
-[Events](https://developers.google.com/analytics/devguides/collection/gtagjs/events) expect an action.
-
-```ts
-gtag.event('view_promotion');
-```
-
-You can optionally pass in addtional params.
-
-```ts
-gtag.event('login', {
-  method: 'Instagram',
-  event_category: 'engagemnt',
-  event_label: 'New user logged in via OAuth'
-});
-```
-
-## Event Directive
-
-Many analytics events are tracked based on user interaction, such as button clicks. Just tell it which DOM event to track.
-
-```html
-<button gtagEvent trackOn="click">Track Me</button>
-```
-
-This will register a general event in GA based on the event name.
-
-![](https://firebasestorage.googleapis.com/v0/b/firestarter-96e46.appspot.com/o/assets%2Fevent-gtag.png?alt=media&token=8f70e408-0300-472b-ab99-75893bef26fb)
-
-You can pass optional params to the directive like so:
-
-```html
-<div gtagEvent
-     trackOn="dragstart"
-     action="product_dragged"
-     category="ecommerce"
-     [params]="{ event_label: 'Something cool just happened' }">
-
-   Some Product...
-
-</div>
-```
-
-The directive will produce the following event on dragstart.
-![](https://firebasestorage.googleapis.com/v0/b/firestarter-96e46.appspot.com/o/assets%2Fevent-gtag2.png?alt=media&token=213e2c60-6892-42a9-ac21-e828114e423a)
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
